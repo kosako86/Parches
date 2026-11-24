@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Museum of Patches</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#17221b;color:#eee9dc;font-family:Georgia,serif}
+header{padding:24px 15px;text-align:center;background:#202f25;border-bottom:1px solid #806d46}
+header h1{font-size:25px;letter-spacing:3px;margin:0}
+header p{color:#c7ad70;font:11px Arial;letter-spacing:3px}
+main{max-width:1000px;margin:auto;padding:22px}
+.hero{min-height:300px;padding:45px 20px;display:flex;align-items:center;
+background:linear-gradient(90deg,#101a13eF,#17251bd9),
+url('') center/cover;
+border:1px solid #71613f;text-align:center;justify-content:center}
+.hero h2{font-size:35px;font-weight:normal}
+.hero p{color:#c7ad70;font:13px Arial;letter-spacing:2px}
+.photo{border:1px dashed #a58c57;padding:12px;margin-top:20px;font:12px Arial;color:#d4c394}
+h3.section{font-size:19px;font-weight:normal;letter-spacing:2px;margin:35px 0 18px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.card{background:#26372b;border:1px solid #4b5948;padding:25px 18px;
+color:#eee9dc;text-align:left;cursor:pointer;border-radius:5px;min-height:145px}
+.card:hover{border-color:#c7ad70;background:#304433}
+.flag{font-size:35px}
+.card h2{font-size:23px;font-weight:normal;margin:12px 0 5px}
+.card p{font:13px Arial;color:#c0c3b8;margin:0}
+.page-title{font-size:32px;font-weight:normal;margin:15px 0}
+.back{background:none;border:0;color:#c7ad70;padding:12px 0;cursor:pointer;font-size:15px}
+.category{min-height:140px}
+.category h2{font-size:20px}
+.country-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.map{height:100px;background:#1c2c21;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.map svg{width:110px;height:85px;fill:#a18c5d;stroke:#d1bd8c;stroke-width:1.5}
+.notice{margin-top:25px;padding:17px;border:1px dashed #53604e;color:#b9b8aa;font:13px/1.6 Arial}
+footer{text-align:center;padding:25px;color:#9b9b8e;font:11px Arial;letter-spacing:2px;border-top:1px solid #465345;margin-top:40px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.country-grid{grid-template-columns:repeat(3,1fr)}.hero{min-height:370px}}
+</style>
+</head>
+<body>
+<header>
+<h1>MUSEUM OF PATCHES</h1>
+<p>WORLD MILITARY COLLECTIONS</p>
+</header>
+<main id="app"></main>
+<footer>COLECCIONES MILITARES DEL MUNDO</footer>
+<script>
+const app=document.getElementById("app");
+
+const categorias=[
+["Medallas","🏅","Condecoraciones y medallas"],
+["Parches","⬟","Parches de unidades militares"],
+["Insignias","⚜","Distintivos y emblemas"],
+["Otros","◇","Otras piezas de colección"]
+];
+
+
+const paises=[
+["Afganistán","🇦🇫","M35 8 L65 14 82 35 69 52 76 72 54 91 39 76 20 69 28 48 15 29Z",1],
+["Alemania","🇩🇪","M51 7 L70 17 65 34 78 49 67 68 58 87 42 77 30 62 35 43 25 25Z",null],
+["Bulgaria","🇧🇬","M18 25 L72 16 85 38 76 67 51 81 25 69 12 45Z",1],
+["Eslovaquia","🇸🇰","M12 39 L34 22 66 25 87 39 76 59 48 68 20 59Z",1],
+["España","🇪🇸","M18 22 L67 13 86 34 78 65 57 82 29 76 12 53Z",47],
+["Estados Unidos de América","🇺🇸","M8 27 L28 16 48 22 65 13 88 29 80 48 91 66 65 78 43 69 25 83 12 60Z",5],
+["Francia","🇫🇷","M38 12 L63 16 78 34 70 54 79 70 57 85 36 73 19 59 25 38 17 25Z",8],
+["Italia","🇮🇹","M42 10 L62 22 57 42 75 57 69 72 56 62 48 84 39 69 43 51 28 34Z",1],
+["Kuwait","🇰🇼","M28 25 L68 18 81 42 69 72 43 78 20 56Z",1],
+["Líbano","🇱🇧","M44 9 L64 21 58 43 67 66 49 88 35 65 39 39Z",1],
+["Palestina","🇵🇸","M38 12 L62 19 57 43 66 64 49 84 34 64 39 39Z",1],
+["Perú","🇵🇪","M38 9 L65 20 72 43 58 57 62 78 40 91 25 70 29 46 17 27Z",1],
+["Reino Unido","🇬🇧","M47 8 L64 19 55 35 68 47 57 61 65 77 47 91 35 73 42 57 27 42 38 27Z",4],
+["Rusia","🇷🇺","M8 27 L25 13 44 19 58 10 79 19 93 36 78 51 90 68 65 76 48 66 30 81 13 60Z",3],
+["Ucrania","🇺🇦","M15 27 L40 15 67 19 87 35 77 57 57 73 31 68 13 49Z",550]
+];
+
+const organizaciones=[
+["OTAN","🛡️","M50 8 L85 25 78 65 50 90 22 65 15 25Z",1]
+];
+
+
+function inicio(){
+app.innerHTML=`
+<section class="hero">
+<div>
+<p>HISTORIA · COLECCIONISMO · CULTURA MILITAR</p>
+<h2>Condecoraciones e insignias militares del mundo</h2>
+<p>UN VIAJE POR LAS COLECCIONES MILITARES INTERNACIONALES</p>
+<div class="photo">AQUÍ COLOCAREMOS UNA FOTOGRAFÍA REAL DE TUS PARCHES</div>
+</div>
+</section>
+<h3 class="section">EXPLORAR COLECCIONES</h3>
+<div class="grid">
+<button class="card" onclick="pais('Ucrania','🇺🇦')">
+<span class="flag">🇺🇦</span><h2>Ucrania</h2>
+<p>Acceder a la colección</p>
+</button>
+<button class="card" onclick="otrosPaises()">
+<span class="flag">🌍</span><h2>Otros países</h2>
+<p>Colección internacional</p>
+</button>
+</div>`;
+}
+
+function pais(nombre,bandera){
+app.innerHTML=`
+<button class="back" onclick="inicio()">← Inicio</button>
+<p>${bandera} COLECCIÓN NACIONAL</p>
+<h2 class="page-title">${nombre}</h2>
+<p>Selecciona una categoría:</p>
+<div class="grid">
+${categorias.map(c=>`
+<button class="card category" onclick="categoria('${nombre}','${c[0]}')">
+<span class="flag">${c[1]}</span><h2>${c[0]}</h2><p>${c[2]}</p>
+</button>`).join("")}
+</div>`;
+}
+
+function otrosPaises(){
+app.innerHTML=`
+<button class="back" onclick="inicio()">← Inicio</button>
+<p>COLECCIÓN INTERNACIONAL</p>
+<h2 class="page-title">Otros países</h2>
+<p>Selecciona un país:</p>
+<div class="country-grid">
+${paises.map(p=>`
+<button class="card" onclick="pais('${p[0]}','${p[1]}')">
+<div class="map"><svg viewBox="0 0 100 100"><path d="${p[2]}"/></svg></div>
+<h2>${p[1]} ${p[0]}</h2><p>Ver colección →</p>
+</button>`).join("")}
+</div>
+<div class="notice">Añadiremos más países conforme incorporemos piezas al catálogo.</div>`;
+}
+
+function categoria(nombre,cat){
+app.innerHTML=`
+<button class="back" onclick="pais('${nombre}','${nombre==='Ucrania'?'🇺🇦':'🌍'}')">← Volver a ${nombre}</button>
+<p>COLECCIÓN · ${nombre.toUpperCase()}</p>
+<h2 class="page-title">${cat}</h2>
+<div class="notice">
+Esta sección está preparada. En la siguiente fase incorporaremos las piezas, fotografías y fichas históricas de la colección.
+</div>`;
+}
+
+inicio();
+</script>
+</body>
+</html>
