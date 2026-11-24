@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ucrania - Cuerpos y mandos | Museo de Parches</title>
+
+<style>
+:root{
+  --fondo:#17221b;
+  --cabecera:#202f25;
+  --tarjeta:#26372b;
+  --tarjeta2:#304434;
+  --oro:#c7ad70;
+  --texto:#f1eee5;
+  --secundario:#b9c1b7;
+  --borde:#435545;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--fondo);
+  color:var(--texto);
+  font-family:Georgia,"Times New Roman",serif;
+}
+header{
+  background:var(--cabecera);
+  border-bottom:2px solid var(--oro);
+  padding:23px 15px;
+  text-align:center;
+}
+header h1{
+  margin:0;
+  color:var(--oro);
+  font-size:clamp(25px,5vw,38px);
+  letter-spacing:2px;
+}
+header p{
+  margin:8px 0 0;
+  color:var(--secundario);
+  font-size:13px;
+  letter-spacing:2px;
+}
+main{
+  max-width:1100px;
+  min-height:75vh;
+  margin:auto;
+  padding:25px 16px 45px;
+}
+footer{
+  padding:22px 12px;
+  text-align:center;
+  color:var(--secundario);
+  border-top:1px solid var(--borde);
+  font-size:12px;
+}
+h2,h3{color:var(--oro)}
+.boton{
+  display:inline-block;
+  background:var(--tarjeta);
+  border:1px solid var(--borde);
+  color:var(--texto);
+  padding:10px 16px;
+  border-radius:7px;
+  cursor:pointer;
+  font-family:inherit;
+  font-size:14px;
+  text-decoration:none;
+  margin-bottom:22px;
+}
+.boton:hover{
+  border-color:var(--oro);
+  color:var(--oro);
+}
+.migas{
+  color:var(--secundario);
+  font-size:13px;
+  margin-bottom:20px;
+}
+.migas span{color:var(--oro)}
+.cabecera-seccion{
+  text-align:center;
+  padding:15px 0 25px;
+}
+.bandera{
+  display:block;
+  font-size:48px;
+  margin-bottom:10px;
+}
+.cabecera-seccion h2{
+  font-size:27px;
+  margin:5px 0;
+}
+.intro{
+  max-width:650px;
+  margin:12px auto;
+  color:var(--secundario);
+  line-height:1.6;
+}
+.seccion-titulo{
+  margin:25px 0 15px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--borde);
+}
+.busqueda{
+  width:100%;
+  padding:14px;
+  border-radius:7px;
+  border:1px solid var(--borde);
+  background:var(--tarjeta);
+  color:var(--texto);
+  font-size:15px;
+  outline:none;
+  margin:10px 0 20px;
+}
+.busqueda:focus{border-color:var(--oro)}
+.busqueda::placeholder{color:var(--secundario)}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:15px;
+}
+.tarjeta{
+  display:block;
+  background:var(--tarjeta);
+  border:1px solid var(--borde);
+  border-radius:9px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.2s;
+  color:var(--texto);
+}
+.tarjeta:hover{
+  transform:translateY(-3px);
+  border-color:var(--oro);
+  background:var(--tarjeta2);
+}
+.foto{
+  width:100%;
+  aspect-ratio:1/1;
+  background:#202f25;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:var(--secundario);
+}
+.foto img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.foto .sin-foto{
+  text-align:center;
+  padding:15px;
+  font-size:38px;
+}
+.foto .sin-foto small{
+  display:block;
+  font-size:12px;
+  margin-top:8px;
+}
+.nombre{
+  padding:14px;
+  font-size:16px;
+  line-height:1.4;
+}
+.aviso{
+  background:#202f25;
+  border:1px solid var(--borde);
+  border-left:3px solid var(--oro);
+  border-radius:7px;
+  padding:18px;
+  color:var(--secundario);
+  line-height:1.6;
+  margin-top:20px;
+}
+.ficha{
+  background:var(--tarjeta);
+  border:1px solid var(--borde);
+  border-radius:10px;
+  padding:18px;
+  margin-top:15px;
+}
+.ficha-foto{
+  width:100%;
+  max-height:420px;
+  object-fit:contain;
+  background:#202f25;
+  border-radius:7px;
+}
+.descripcion{
+  color:var(--secundario);
+  line-height:1.7;
+  white-space:pre-wrap;
+}
+.oculto{display:none}
+@media(max-width:600px){
+  main{padding:20px 12px 35px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .nombre{font-size:14px;padding:11px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>MUSEO DE PARCHES</h1>
+  <p>COLECCIONES MILITARES DEL MUNDO</p>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  MUSEO DE PARCHES · UCRANIA
+</footer>
+
+<script>
+
+/* =================================
+   DATOS DE CUERPOS Y MANDOS
+
+   Añadiremos aquí las unidades
+   verificadas posteriormente.
+
+   Cada unidad tendrá:
+   - ID interno
+   - Nombre
+   - Fotografía
+   - Descripción opcional
+================================= */
+
+const unidades=[];
+
+/*
+Ejemplo para incorporar una unidad:
+
+{
+  id:"unidad-001",
+  nombre:"Nombre de la unidad",
+  foto:"imagenes/nombre-parche.jpg",
+  descripcion:"Descripción de la unidad."
+}
+
+La fotografía debe estar dentro de la
+carpeta indicada en la ruta de foto.
+*/
+
+/* =================================
+   FUNCIONES
+================================= */
+
+const app=document.getElementById("app");
+
+function escapar(texto){
+  return String(texto??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
+}
+
+function fotoUnidad(unidad){
+  if(unidad.foto){
+    return `
+      <div class="foto">
+        <img src="${escapar(unidad.foto)}"
+             alt="Parche de ${escapar(unidad.nombre)}"
+             onerror="this.parentElement.innerHTML='<div class=sin-foto>⬟<small>Imagen no disponible</small></div>'">
+      </div>
+    `;
+  }
+
+  return `
+    <div class="foto">
+      <div class="sin-foto">
+        ⬟
+        <small>Fotografía pendiente</small>
+      </div>
+    </div>
+  `;
+}
+
+/* =================================
+   PÁGINA PRINCIPAL
+================================= */
+
+function mostrarPrincipal(filtro=""){
+
+  const busqueda=filtro.trim().toLowerCase();
+
+  const resultados=unidades.filter(u=>
+    u.nombre.toLowerCase().includes(busqueda)
+  );
+
+  app.innerHTML=`
+    <a class="boton" href="index.html">← Volver a Ucrania</a>
+    <div class="migas">
+      Museo de Parches / Ucrania / Parches /
+      <span>Cuerpos y mandos</span>
+    </div>
+
+    <section class="cabecera-seccion">
+      <span class="bandera">🇺🇦</span>
+      <h2>Cuerpos y mandos</h2>
+      <p class="intro">
+        Catálogo de parches correspondientes a cuerpos
+        y estructuras de mando de las Fuerzas Armadas
+        de Ucrania.
+      </p>
+    </section>
+
+    <h3 class="seccion-titulo">Buscar unidad</h3>
+
+    <input
+      class="busqueda"
+      id="buscador"
+      type="search"
+      placeholder="Escribe el nombre de una unidad..."
+      value="${escapar(filtro)}"
+    >
+
+    <div class="grid" id="resultados">
+
+      ${
+        resultados.length
+        ?resultados.map(u=>`
+          <article class="tarjeta"
+            onclick="mostrarFicha('${escapar(u.id)}')">
+
+            ${fotoUnidad(u)}
+
+            <div class="nombre">
+              ${escapar(u.nombre)}
+            </div>
+          </article>
+        `).join("")
+        :`
+          <div class="aviso" style="grid-column:1/-1">
+            ${
+              busqueda
+              ?"No se han encontrado unidades con ese nombre."
+              :"Todavía no hay unidades registradas en esta sección. Incorporaremos aquí los cuerpos y mandos identificados en la colección."
+            }
+          </div>
+        `
+      }
+
+    </div>
+  `;
+
+  document.getElementById("buscador").addEventListener("input",e=>{
+    const posicion=e.target.selectionStart;
+    mostrarPrincipal(e.target.value);
+    const nuevo=document.getElementById("buscador");
+    nuevo.focus();
+    nuevo.setSelectionRange(posicion,posicion);
+  });
+}
+
+/* =================================
+   FICHA INDIVIDUAL
+================================= */
+
+function mostrarFicha(id){
+
+  const unidad=unidades.find(u=>u.id===id);
+
+  if(!unidad){
+    mostrarPrincipal();
+    return;
+  }
+
+  app.innerHTML=`
+    <button class="boton" onclick="mostrarPrincipal()">
+      ← Volver a cuerpos y mandos
+    </button>
+
+    <div class="migas">
+      Museo de Parches / Ucrania / Parches /
+      <span>${escapar(unidad.nombre)}</span>
+    </div>
+
+    <section class="ficha">
+
+      <h2>${escapar(unidad.nombre)}</h2>
+
+      ${
+        unidad.foto
+        ?`<img class="ficha-foto"
+            src="${escapar(unidad.foto)}"
+            alt="Parche de ${escapar(unidad.nombre)}">`
+        :`
+          <div class="foto" style="aspect-ratio:4/3">
+            <div class="sin-foto">
+              ⬟
+              <small>Fotografía pendiente</small>
+            </div>
+          </div>
+        `
+      }
+
+      ${
+        unidad.descripcion
+        ?`
+          <h3>Descripción</h3>
+          <p class="descripcion">${escapar(unidad.descripcion)}</p>
+        `
+        :""
+      }
+
+    </section>
+  `;
+}
+
+/* =================================
+   INICIO
+================================= */
+
+mostrarPrincipal();
+
+</script>
+</body>
+</html>
