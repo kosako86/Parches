@@ -3,679 +3,341 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#17221b">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Museo de Parches</title>
-
 <style>
-
-*{
-  box-sizing:border-box;
+:root{
+  --fondo:#17221b;
+  --cabecera:#202f25;
+  --tarjeta:#26372b;
+  --tarjeta2:#304434;
+  --oro:#c7ad70;
+  --texto:#f1eee5;
+  --secundario:#b9c1b7;
+  --borde:#435545;
 }
-
+*{box-sizing:border-box}
 body{
-  margin:0;
-  background:#17221b;
-  color:#eee9dc;
-  font-family:Georgia,serif;
+  margin:0;background:var(--fondo);color:var(--texto);
+  font-family:Georgia,"Times New Roman",serif;
 }
-
-/* CABECERA */
-
 header{
-  padding:25px 15px;
-  text-align:center;
-  background:#202f25;
-  border-bottom:1px solid #806d46;
+  background:var(--cabecera);border-bottom:2px solid var(--oro);
+  padding:25px 15px;text-align:center;
 }
-
 header h1{
-  font-size:26px;
-  letter-spacing:3px;
-  margin:0;
+  margin:0;color:var(--oro);
+  font-size:clamp(25px,5vw,38px);letter-spacing:2px;
 }
-
 header p{
-  color:#c7ad70;
-  font:11px Arial;
-  letter-spacing:3px;
+  margin:8px 0 0;color:var(--secundario);
+  font-size:13px;letter-spacing:2px;
 }
-
-/* CONTENIDO */
-
-main{
-  max-width:1000px;
-  margin:auto;
-  padding:22px;
-}
-
-/* PORTADA */
-
-.hero{
-  min-height:320px;
-  padding:45px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,#101a13,#26372b);
-  border:1px solid #71613f;
-  text-align:center;
-}
-
-.hero h2{
-  font-size:35px;
-  font-weight:normal;
-  line-height:1.3;
-}
-
-.hero p{
-  color:#c7ad70;
-  font:13px Arial;
-  letter-spacing:2px;
-  line-height:1.7;
-}
-
-.photo{
-  border:1px dashed #a58c57;
-  padding:22px 12px;
-  margin-top:25px;
-  font:12px Arial;
-  color:#d4c394;
-}
-
-/* TÍTULOS */
-
-h3.section{
-  font-size:19px;
-  font-weight:normal;
-  letter-spacing:2px;
-  margin:35px 0 18px;
-}
-
-.page-title{
-  font-size:32px;
-  font-weight:normal;
-  margin:15px 0;
-}
-
-/* CUADRÍCULAS */
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
-
-.country-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-/* TARJETAS */
-
-.card{
-  background:#26372b;
-  border:1px solid #4b5948;
-  padding:25px 15px;
-  color:#eee9dc;
-  text-align:center;
-  cursor:pointer;
-  border-radius:5px;
-  min-height:150px;
-  font-family:Georgia,serif;
-  transition:background .2s,border-color .2s;
-}
-
-.card:hover{
-  border-color:#c7ad70;
-  background:#304433;
-}
-
-.card:active{
-  background:#394c3b;
-}
-
-/* BANDERAS */
-
-.flag{
-  font-size:48px;
-  line-height:1.3;
-  display:block;
-}
-
-.card h2{
-  font-size:21px;
-  font-weight:normal;
-  margin:12px 0 7px;
-  line-height:1.3;
-}
-
-.card p{
-  font:13px Arial;
-  color:#c0c3b8;
-  margin:0;
-}
-
-/* TARJETAS DE PAÍSES */
-
-.country-card{
-  min-height:155px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  padding:20px 10px;
-}
-
-.country-card .flag{
-  font-size:53px;
-  margin-bottom:5px;
-}
-
-.country-card h2{
-  font-size:18px;
-  margin:5px 0;
-}
-
-.country-card p{
-  color:#c7ad70;
-}
-
-/* BOTÓN VOLVER */
-
-.back{
-  background:none;
-  border:0;
-  color:#c7ad70;
-  padding:12px 0;
-  cursor:pointer;
-  font-size:15px;
-  font-family:Georgia,serif;
-}
-
-/* CATEGORÍAS */
-
-.category{
-  min-height:150px;
-}
-
-.category h2{
-  font-size:20px;
-}
-
-/* AVISOS */
-
-.notice{
-  margin-top:25px;
-  padding:17px;
-  border:1px dashed #53604e;
-  color:#b9b8aa;
-  font:13px/1.7 Arial;
-}
-
-/* PIE DE PÁGINA */
-
+main{max-width:1100px;min-height:70vh;margin:auto;padding:25px 16px 45px}
 footer{
-  text-align:center;
-  padding:25px;
-  color:#9b9b8e;
-  font:11px Arial;
-  letter-spacing:2px;
-  border-top:1px solid #465345;
-  margin-top:40px;
+  padding:22px 12px;text-align:center;color:var(--secundario);
+  border-top:1px solid var(--borde);font-size:12px;
 }
-
-/* ORDENADOR */
-
-@media(min-width:700px){
-
-  .grid{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .country-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .hero{
-    min-height:380px;
-  }
-
-  .hero h2{
-    font-size:42px;
-  }
-
+h2{color:var(--oro);margin-top:0}
+.hero{text-align:center;padding:30px 10px 35px}
+.hero h2{font-size:28px;letter-spacing:1px}
+.hero p,.intro{
+  max-width:650px;margin:15px auto;color:var(--secundario);line-height:1.6;
 }
-
-/* MÓVILES PEQUEÑOS */
-
-@media(max-width:360px){
-
-  main{
-    padding:14px;
-  }
-
-  .country-grid{
-    gap:9px;
-  }
-
-  .country-card{
-    padding:15px 5px;
-  }
-
-  .country-card h2{
-    font-size:16px;
-  }
-
+.seccion-titulo{
+  margin:30px 0 15px;padding-bottom:10px;
+  border-bottom:1px solid var(--borde);color:var(--oro);font-size:21px;
 }
-
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px;
+}
+.tarjeta{
+  background:var(--tarjeta);border:1px solid var(--borde);
+  border-radius:10px;padding:22px 17px;min-height:135px;
+  cursor:pointer;transition:.2s;text-align:left;color:var(--texto);
+  font-family:inherit;width:100%;text-decoration:none;display:block;
+}
+.tarjeta:hover{
+  transform:translateY(-3px);background:var(--tarjeta2);
+  border-color:var(--oro);
+}
+.tarjeta .icono{display:block;font-size:30px;margin-bottom:12px}
+.tarjeta h3{margin:0 0 8px;color:var(--oro);font-size:19px}
+.tarjeta p{margin:0;color:var(--secundario);font-size:13px;line-height:1.5}
+.boton-volver{
+  display:inline-block;background:var(--tarjeta);border:1px solid var(--borde);
+  color:var(--texto);padding:10px 16px;border-radius:7px;
+  cursor:pointer;font-family:inherit;font-size:14px;margin-bottom:22px;
+}
+.boton-volver:hover{border-color:var(--oro);color:var(--oro)}
+.breadcrumb{color:var(--secundario);font-size:13px;margin-bottom:18px}
+.breadcrumb span{color:var(--oro)}
+.pais-cabecera{text-align:center;padding:15px 0 25px}
+.pais-bandera{font-size:55px;display:block;margin-bottom:10px}
+.aviso{
+  background:#202f25;border:1px solid var(--borde);
+  border-left:3px solid var(--oro);border-radius:7px;
+  padding:18px;color:var(--secundario);line-height:1.6;margin-top:18px;
+}
+@media(max-width:600px){
+  main{padding:20px 12px 35px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .tarjeta{padding:16px 12px;min-height:125px}
+  .tarjeta h3{font-size:16px}
+  .tarjeta p{font-size:12px}
+  .tarjeta .icono{font-size:26px}
+}
 </style>
 </head>
 
 <body>
-
 <header>
-
   <h1>MUSEO DE PARCHES</h1>
-
   <p>COLECCIONES MILITARES DEL MUNDO</p>
-
 </header>
-
 
 <main id="app"></main>
 
-
 <footer>
-
-  MUSEO DE PARCHES · COLECCIONISMO MILITAR
-
+  MUSEO DE PARCHES · COLECCIONES MILITARES DEL MUNDO
 </footer>
 
-
 <script>
-
-/* ==================================
-   ELEMENTO PRINCIPAL
-================================== */
-
 const app=document.getElementById("app");
 
-
-/* ==================================
-   CATEGORÍAS
-================================== */
-
 const categorias=[
-
   ["Medallas","🏅","Condecoraciones y medallas"],
-
   ["Parches","⬟","Parches de unidades militares"],
-
   ["Insignias","⚜","Distintivos y emblemas"],
-
   ["Otros","◇","Otras piezas de colección"]
-
 ];
-
-
-/* ==================================
-   PAÍSES
-   Nombre / Bandera / Código
-================================== */
 
 const paises=[
-
   ["Afganistán","🇦🇫","004"],
-
   ["Alemania","🇩🇪","276"],
-
   ["Bulgaria","🇧🇬","100"],
-
   ["Eslovaquia","🇸🇰","703"],
-
   ["España","🇪🇸","724"],
-
   ["Estados Unidos de América","🇺🇸","840"],
-
   ["Francia","🇫🇷","250"],
-
   ["Italia","🇮🇹","380"],
-
   ["Kuwait","🇰🇼","414"],
-
   ["Líbano","🇱🇧","422"],
-
   ["Palestina","🇵🇸","275"],
-
   ["Perú","🇵🇪","604"],
-
   ["Reino Unido","🇬🇧","826"],
-
   ["Rusia","🇷🇺","643"],
-
   ["Ucrania","🇺🇦","804"]
-
 ];
 
+const organizaciones=[["OTAN","🛡️"]];
 
-/* ==================================
-   ORGANIZACIONES
-================================== */
-
-const organizaciones=[
-
-  ["OTAN","🛡️"]
-
-];
-
-
-/* ==================================
-   OBTENER BANDERA
-================================== */
+function escapar(texto){
+  return String(texto??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
 
 function obtenerBandera(nombre){
-
-  const encontrado=paises.find(p=>p[0]===nombre);
-
-  if(encontrado){
-
-    return encontrado[1];
-
-  }
-
-  const organizacion=organizaciones.find(o=>o[0]===nombre);
-
-  if(organizacion){
-
-    return organizacion[1];
-
-  }
-
-  return "🌍";
-
+  const pais=paises.find(p=>p[0]===nombre);
+  return pais?pais[1]:"🌍";
 }
 
+function botonVolver(){
+  return `<button class="boton-volver" onclick="volver()">← Volver</button>`;
+}
 
-/* ==================================
-   INICIO DEL MUSEO
-================================== */
+function migas(texto){
+  return `<div class="breadcrumb">Museo de Parches / <span>${escapar(texto)}</span></div>`;
+}
+
+function tarjeta(icono,titulo,descripcion,accion){
+  return `
+    <button class="tarjeta" onclick="${accion}">
+      <span class="icono">${icono}</span>
+      <h3>${escapar(titulo)}</h3>
+      <p>${escapar(descripcion)}</p>
+    </button>
+  `;
+}
+
+function tarjetaEnlace(icono,titulo,descripcion,archivo){
+  return `
+    <a class="tarjeta" href="${archivo}">
+      <span class="icono">${icono}</span>
+      <h3>${escapar(titulo)}</h3>
+      <p>${escapar(descripcion)}</p>
+    </a>
+  `;
+}
+
+/* PORTADA */
 
 function inicio(){
+  historial=[];
 
   app.innerHTML=`
-
     <section class="hero">
-
-      <div>
-
-        <p>
-          HISTORIA · COLECCIONISMO · CULTURA MILITAR
-        </p>
-
-        <h2>
-          Condecoraciones e insignias militares del mundo
-        </h2>
-
-        <p>
-          UN VIAJE POR LAS COLECCIONES MILITARES INTERNACIONALES
-        </p>
-
-        <div class="photo">
-
-          AQUÍ COLOCAREMOS UNA FOTOGRAFÍA REAL DE TU COLECCIÓN
-
-        </div>
-
-      </div>
-
+      <h2>Bienvenido al Museo de Parches</h2>
+      <p>
+        Un espacio dedicado a la conservación, catalogación
+        y exposición de colecciones militares de diferentes países.
+      </p>
     </section>
 
-
-    <h3 class="section">
-      EXPLORAR COLECCIONES
-    </h3>
-
+    <h2 class="seccion-titulo">Explorar colecciones</h2>
 
     <div class="grid">
-
-      <button class="card" onclick="pais('Ucrania')">
-
-        <span class="flag">🇺🇦</span>
-
-        <h2>Ucrania</h2>
-
-        <p>Acceder a la colección</p>
-
-      </button>
-
-
-      <button class="card" onclick="otrosPaises()">
-
-        <span class="flag">🌍</span>
-
-        <h2>Otros países</h2>
-
-        <p>Colección internacional</p>
-
-      </button>
-
+      ${tarjeta("🇺🇦","Ucrania","Colección militar ucraniana","pais('Ucrania')")}
+      ${tarjeta("🌍","Otros países","Colecciones militares internacionales","otrosPaises()")}
     </div>
-
   `;
-
 }
 
-
-/* ==================================
-   PÁGINA DE UN PAÍS
-================================== */
+/* PAÍS */
 
 function pais(nombre){
-
-  const bandera=obtenerBandera(nombre);
+  guardar();
 
   app.innerHTML=`
+    ${botonVolver()}
+    ${migas(nombre)}
 
-    <button class="back" onclick="inicio()">
+    <div class="pais-cabecera">
+      <span class="pais-bandera">${obtenerBandera(nombre)}</span>
+      <h2>${escapar(nombre)}</h2>
+      <p class="intro">Colección militar de ${escapar(nombre)}</p>
+    </div>
 
-      ← Inicio
-
-    </button>
-
-
-    <p>${bandera} COLECCIÓN NACIONAL</p>
-
-
-    <h2 class="page-title">
-
-      ${nombre}
-
-    </h2>
-
-
-    <p>Selecciona una categoría:</p>
-
+    <h2 class="seccion-titulo">Categorías</h2>
 
     <div class="grid">
-
-      ${categorias.map(c=>`
-
-        <button
-          class="card category"
-          onclick="categoria('${nombre}','${c[0]}')"
-        >
-
-          <span class="flag">${c[1]}</span>
-
-          <h2>${c[0]}</h2>
-
-          <p>${c[2]}</p>
-
-        </button>
-
-      `).join("")}
-
+      ${
+        nombre==="Ucrania"
+        ?`
+          ${tarjetaEnlace("🏅","Medallas","Condecoraciones y medallas","Ukr5.html")}
+          ${tarjeta("⬟","Parches","Parches de unidades militares","parchesUcrania()")}
+          ${tarjetaEnlace("⚜","Insignias","Distintivos y emblemas","Ukr6.html")}
+          ${tarjetaEnlace("◇","Otros","Otras piezas de colección","Ukr7.html")}
+        `
+        :categorias.map(c=>tarjeta(
+          c[1],c[0],c[2],`categoria('${nombre}','${c[0]}')`
+        )).join("")
+      }
     </div>
-
   `;
-
 }
 
+/* NAVEGACIÓN DE PARCHES UCRANIANOS */
 
-/* ==================================
-   OTROS PAÍSES
-================================== */
-
-function otrosPaises(){
+function parchesUcrania(){
+  guardar();
 
   app.innerHTML=`
+    ${botonVolver()}
+    ${migas("Ucrania / Parches")}
 
-    <button class="back" onclick="inicio()">
-
-      ← Inicio
-
-    </button>
-
-
-    <p>COLECCIÓN INTERNACIONAL</p>
-
-
-    <h2 class="page-title">
-
-      Otros países
-
-    </h2>
-
-
-    <p>Selecciona un país:</p>
-
-
-    <div class="country-grid">
-
-      ${paises
-
-        .filter(p=>p[0]!=="Ucrania")
-
-        .map(p=>`
-
-          <button
-            class="card country-card"
-            onclick="pais('${p[0]}')"
-          >
-
-            <span class="flag">${p[1]}</span>
-
-            <h2>${p[0]}</h2>
-
-            <p>Ver colección →</p>
-
-          </button>
-
-        `).join("")}
-
-    </div>
-
-
-    <h3 class="section">
-
-      ORGANIZACIONES INTERNACIONALES
-
-    </h3>
-
-
-    <div class="grid">
-
-      ${organizaciones.map(o=>`
-
-        <button
-          class="card"
-          onclick="pais('${o[0]}')"
-        >
-
-          <span class="flag">${o[1]}</span>
-
-          <h2>${o[0]}</h2>
-
-          <p>Organización internacional</p>
-
-        </button>
-
-      `).join("")}
-
-    </div>
-
-
-    <div class="notice">
-
-      Añadiremos nuevos países y organizaciones conforme
-      incorporemos nuevas colecciones al museo.
-
-    </div>
-
-  `;
-
-}
-
-
-/* ==================================
-   PÁGINA DE CATEGORÍAS
-================================== */
-
-function categoria(nombre,cat){
-
-  const bandera=obtenerBandera(nombre);
-
-  app.innerHTML=`
-
-    <button
-      class="back"
-      onclick="pais('${nombre}')"
-    >
-
-      ← Volver a ${nombre}
-
-    </button>
-
-
-    <p>
-
-      COLECCIÓN · ${nombre.toUpperCase()}
-
+    <h2>Ucrania · Parches</h2>
+    <p class="intro">
+      Selecciona el grupo de unidades que quieres consultar.
     </p>
 
-
-    <h2 class="page-title">
-
-      ${cat}
-
-    </h2>
-
-
-    <div class="notice">
-
-      Esta sección está preparada.
-
-      En la siguiente fase incorporaremos las piezas,
-      fotografías y fichas históricas de la colección.
-
+    <div class="grid">
+      ${tarjetaEnlace("🏛️","Cuerpos y mandos","Estructuras de mando","Ukr1.html")}
+      ${tarjetaEnlace("🛡️","Brigadas","Parches de brigadas","Ukr2.html")}
+      ${tarjetaEnlace("⚔️","Batallones y compañías","Unidades militares","Ukr3.html")}
+      ${tarjetaEnlace("🎖️","Otras unidades","Otras formaciones militares","Ukr4.html")}
     </div>
-
   `;
-
 }
 
+/* OTROS PAÍSES */
 
-/* ==================================
-   ARRANCAR EL MUSEO
-================================== */
+function otrosPaises(){
+  guardar();
+
+  const lista=paises.filter(p=>p[0]!=="Ucrania");
+
+  app.innerHTML=`
+    ${botonVolver()}
+    ${migas("Otros países")}
+
+    <h2>Otros países</h2>
+    <p class="intro">
+      Selecciona un país para consultar sus colecciones militares.
+    </p>
+
+    <div class="grid">
+      ${lista.map(p=>tarjeta(
+        p[1],p[0],"Ver colección",`pais('${p[0]}')`
+      )).join("")}
+    </div>
+
+    <h2 class="seccion-titulo">Organizaciones internacionales</h2>
+
+    <div class="grid">
+      ${organizaciones.map(o=>tarjeta(
+        o[1],o[0],"Colección de la organización",`organizacion('${o[0]}')`
+      )).join("")}
+    </div>
+  `;
+}
+
+/* CATEGORÍAS DE OTROS PAÍSES */
+
+function categoria(nombre,cat){
+  guardar();
+
+  app.innerHTML=`
+    ${botonVolver()}
+    ${migas(nombre+" / "+cat)}
+
+    <h2>${escapar(cat)}</h2>
+    <p class="intro">
+      Colección de ${escapar(cat.toLowerCase())} de ${escapar(nombre)}.
+    </p>
+
+    <div class="aviso">
+      Esta sección está preparada para incorporar
+      fotografías y fichas de la colección.
+    </div>
+  `;
+}
+
+/* ORGANIZACIONES */
+
+function organizacion(nombre){
+  guardar();
+
+  app.innerHTML=`
+    ${botonVolver()}
+    ${migas(nombre)}
+    <h2>${escapar(nombre)}</h2>
+
+    <div class="aviso">
+      Esta sección está preparada para incorporar
+      las piezas y fichas de la organización.
+    </div>
+  `;
+}
+
+/* VOLVER */
+
+let historial=[];
+
+function guardar(){
+  historial.push(app.innerHTML);
+}
+
+function volver(){
+  if(historial.length){
+    app.innerHTML=historial.pop();
+  }else{
+    inicio();
+  }
+}
 
 inicio();
-
 </script>
-
 </body>
 </html>
